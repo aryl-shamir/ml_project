@@ -88,11 +88,11 @@ class ModelTrainer():
                                                 X_test, y_test, models, params)
             
             # Get the best model from model report 
-            best_model_score = sorted(model_report.values())[0]
-            best_model_name=  sorted(model_report, key=model_report.get, reverse=True)[0]
+            best_model_score = max(model_report.values())
+            best_model_name=  max(model_report, key=model_report.get)
             best_model= models[best_model_name]
-            # if best_model_score<0.6:
-            #     raise CustomError("No best model found", sys)
+            if best_model_score<0.6:
+                raise CustomError("No best model found")
             logging.info(f"Best found model on both training and testing dataset")
 
             save_object(
